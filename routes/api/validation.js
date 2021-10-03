@@ -1,9 +1,11 @@
 const Joi = require('joi');
 
 const schemaContact = Joi.object({
-  name: Joi.string().alphanum().min(1).max(20).required(),
-  number: Joi.number().integer().required(),
-  email: Joi.string().required(),
+  name: Joi.string().min(1).max(20).required(),
+  phone: Joi.number().integer().required(),
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ru'] } })
+    .required(),
 });
 
 const schemaStatusContact = Joi.object({
